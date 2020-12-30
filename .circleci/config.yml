@@ -12,7 +12,7 @@ jobs:
       - checkout
       - run: yarn install --frozen-lockfile
       - run: yarn build index.html
-      - run: yarn test
+      # - run: yarn test
   deploy:
     machine:
       image: ubuntu-2004:202010-01
