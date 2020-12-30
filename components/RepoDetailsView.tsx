@@ -1,6 +1,7 @@
 import * as React from "react";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import {Card, Image, Row, Col, Spinner} from "react-bootstrap";
 
 const RepoDetailsView = () => {
     const {user: userNameParam, repo: repoNameParam} = useParams();
@@ -16,16 +17,39 @@ const RepoDetailsView = () => {
     }, [userNameParam, repoNameParam]);
     // repository name, description, number of stars, language, and the owners name
     if (!repoInfo) {
-        return <div>Loading repo details...</div>;
+        return (<div className="pt-5 d-flex">
+            <Spinner className="mx-auto" animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+            </Spinner>
+        </div>);
     }
+
     return (
-        <ul>
-            <li>repo name: {repoInfo.name}</li>
-            <li>repo description: {repoInfo.description}</li>
-            <li>number of stars: {repoInfo.stargazers_count}</li>
-            <li>language: {repoInfo.language}</li>
-            <li>owner's name: {repoInfo.owner.login}</li>
-        </ul>
+        <div className="pt-4">
+            <Card>
+                <Row>
+                    <Col xs={3}>
+                        <Image src={repoInfo.owner.avatar_url} fluid rounded/>
+                    </Col>
+                    <Col>
+
+                        <Card.Body>
+                            <Card.Title>
+                                {repoInfo.full_name}
+                            </Card.Title>
+                            <Card.Subtitle className="text-muted mb-2">
+                                {[repoInfo.language ? repoInfo.language : "🤷", `⭐${repoInfo.stargazers_count}`].join(" - ")}
+                            </Card.Subtitle>
+                            <Card.Text>
+                                {repoInfo.description}
+                            </Card.Text>
+
+                            <Card.Link href={repoInfo.owner.html_url} target="_blank" rel="noopener noreferrer">@{repoInfo.owner.login}</Card.Link>
+                            <Card.Link href={repoInfo.html_url} target="_blank" rel="noopener noreferrer">Repository</Card.Link>
+                        </Card.Body>
+                    </Col></Row>
+            </Card>
+        </div>
     );
 };
 

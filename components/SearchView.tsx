@@ -5,6 +5,7 @@ import LanguageFilterInput from "./LanguageFilterInput";
 import SortInput from "./SortInput";
 import {
     ListGroup,
+    Spinner,
     Form
 } from "react-bootstrap";
 
@@ -115,9 +116,15 @@ const SearchView = () => {
                     value={query.get("sort")}
                 />
             </Form>
-            {loading && <div>Loading repo list...</div>}
+            {loading &&
+                <div className="pt-5 d-flex">
+                    <Spinner className="mx-auto" animation="border" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </Spinner>
+                </div>
+            }
             {!loading &&
-            <ListGroup>
+            <ListGroup className="pt-4">
                 {repos.map(({id, full_name, language, stargazers_count}) => {
                     const handleRepoClick = () => {
                         history.push(`/${full_name}?${query.toString()}`);
