@@ -11,10 +11,6 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn build index.html
       - aws-s3/sync:
-          arguments: '--dryrun'
-          # aws-access-key-id: $AWS_ACCESS_KEY_ID
-          # aws-region: us-west-2
-          # aws-secret-access-key: $AWS_SECRET_ACCESS_KEY
           from: dist
           to: 's3://kenhoff-github-searcher/'
 workflows:
