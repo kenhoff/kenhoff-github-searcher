@@ -8,9 +8,11 @@ jobs:
       image: ubuntu-2004:202010-01
     steps:
       # checking to see if the build installs, succeeds, and tests without error.
+      # todo: persist bundle between job steps
       - checkout
       - run: yarn install --frozen-lockfile
       - run: yarn build index.html
+      - run: yarn test
   deploy:
     machine:
       image: ubuntu-2004:202010-01
