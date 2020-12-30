@@ -13,7 +13,7 @@ jobs:
       - aws-s3/sync:
           arguments: '--dryrun'
           # aws-access-key-id: $AWS_ACCESS_KEY_ID
-          aws-region: us-west-2
+          # aws-region: us-west-2
           # aws-secret-access-key: $AWS_SECRET_ACCESS_KEY
           from: dist
           to: 's3://kenhoff-github-searcher/'
