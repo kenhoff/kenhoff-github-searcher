@@ -1,3 +1,7 @@
+# ******************************************************************************
+# @kenhoff: from https://raw.githubusercontent.com/github/linguist/master/lib/linguist/languages.yml
+# ******************************************************************************
+
 # Defines all Languages known to GitHub.
 #
 # fs_name               - Optional field. Only necessary as a replacement for the sample directory name if the

@@ -10,6 +10,13 @@ jobs:
       - checkout
       - run: yarn install --frozen-lockfile
       - run: yarn build index.html
+  deploy:
+    requires:
+      - build
+    filters:
+      branches:
+        only: master
+    steps:
       - aws-s3/sync:
           from: dist
           to: 's3://kenhoff-github-searcher/'

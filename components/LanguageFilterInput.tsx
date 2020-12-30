@@ -1,11 +1,6 @@
 import * as React from "react";
-
-// hardcoded for now, matches the language strings from github.
-const languages = [
-    "JavaScript",
-    "Python",
-    "COBOL"
-];
+// languages come from langauges.yml, copied from github linguist, processed through convertLanguages.js
+import languages from "../languages";
 
 const LanguageFilterInput = ({value = [], onChange}) => {
     const handleChange = (e) => {
@@ -13,15 +8,20 @@ const LanguageFilterInput = ({value = [], onChange}) => {
         onChange([e.target.value]);
     };
 
+    const handleClearFilterClick = () => {
+        onChange([]);
+    }
+
     // temp til we get react-select multiselect in
     const selectedValue = value.length === 0 ? "" : value[0];
 
-    return <select value={selectedValue} onChange={handleChange}>
+    return <><select value={selectedValue} onChange={handleChange}>
         <option disabled value="">Filter by language....</option>
-        {languages.map((language) => {
+        {languages.map((language: string) => {
             return <option value={language} key={language}>{language}</option>;
         })}
-    </select>;
+    </select>
+    <button onClick={handleClearFilterClick}>clear language filter</button></>;
 };
 
 export default LanguageFilterInput;

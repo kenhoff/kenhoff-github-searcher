@@ -1,6 +1,5 @@
 todo:
 
--   [ ] deployment
 -   [ ] bootstrap styling
 -   [ ] pagination
 -   [ ] unit tests
