@@ -11,6 +11,8 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn build index.html
   deploy:
+    machine:
+      image: ubuntu-2004:202010-01
     requires:
       - build
     filters:
