@@ -52,6 +52,7 @@ const SearchView = () => {
                 });
         } else {
             // instead, just set the repos list as empty
+            setLoading(false);
             setRepos([]);
         }
     }, 500), []);
@@ -116,6 +117,8 @@ const SearchView = () => {
                     value={query.get("sort")}
                 />
             </Form>
+            {!query.get("search") && <p className="mx-auto pt-5">Please search for a repo ☝</p>}
+
             {loading &&
                 <div className="pt-5 d-flex">
                     <Spinner className="mx-auto" animation="border" role="status">
@@ -123,6 +126,7 @@ const SearchView = () => {
                     </Spinner>
                 </div>
             }
+            {!loading && query.get("search") && repos.length === 0 && <p className="mx-auto pt-5">No repos found!</p>}
             {!loading &&
             <ListGroup className="pt-4">
                 {repos.map(({id, full_name, language, stargazers_count}) => {
@@ -135,7 +139,7 @@ const SearchView = () => {
                             action
                             active = {location.pathname.split("?")[0] === `/${full_name}` ? true : false}
                             onClick={handleRepoClick}>
-                            {full_name} - {language} - {stargazers_count} stars
+                            {full_name} - {language ? language : "🤷"} - {stargazers_count} stars
                         </ListGroup.Item>
                     );
                 })}

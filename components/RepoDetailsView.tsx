@@ -45,7 +45,7 @@ const RepoDetailsView = () => {
                             </Card.Text>
 
                             <Card.Link href={repoInfo.owner.html_url} target="_blank" rel="noopener noreferrer">@{repoInfo.owner.login}</Card.Link>
-                            <Card.Link href={repoInfo.html_url} target="_blank" rel="noopener noreferrer">Repository</Card.Link>
+                            <Card.Link href={repoInfo.html_url} target="_blank" rel="noopener noreferrer">{repoInfo.full_name}</Card.Link>
                         </Card.Body>
                     </Col></Row>
             </Card>
