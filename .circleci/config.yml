@@ -7,17 +7,18 @@ jobs:
     machine:
       image: ubuntu-2004:202010-01
     steps:
+      # checking to see if the build installs, succeeds, and tests without error.
       - checkout
       - run: yarn install --frozen-lockfile
       - run: yarn build index.html
-      - persist_to_workspace:
-          root: .
-          paths:
-            - dist/*
   deploy:
     machine:
       image: ubuntu-2004:202010-01
     steps:
+      # performing the same checkout, install, build step to avoid persisting between steps
+      - checkout
+      - run: yarn install --frozen-lockfile
+      - run: yarn build index.html
       - aws-s3/sync:
           from: dist
           to: 's3://kenhoff-github-searcher/'
