@@ -53,7 +53,7 @@ const SearchView = () => {
             // instead, just set the repos list as empty
             setRepos([]);
         }
-    }, 2000), []);
+    }, 500), []);
 
 
 
@@ -106,18 +106,14 @@ const SearchView = () => {
                         value={query.get("search") || ""}
                     />
                 </Form.Group>
-                <Form.Group>
-                    <LanguageFilterInput
-                        onChange={handleLanguageFilterChange}
-                        value={query.get("languages") ? query.get("languages").split(",") : []}
-                    />
-                </Form.Group>
-                <Form.Group>
-                    <SortInput
-                        onChange = {handleSortChange}
-                        value={query.get("sort")}
-                    />
-                </Form.Group>
+                <LanguageFilterInput
+                    onChange={handleLanguageFilterChange}
+                    value={query.get("languages") ? query.get("languages").split(",") : []}
+                />
+                <SortInput
+                    onChange={handleSortChange}
+                    value={query.get("sort")}
+                />
             </Form>
             {loading && <div>Loading repo list...</div>}
             {!loading &&

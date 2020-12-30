@@ -10,8 +10,9 @@ const App = () => {
     return (
         <Router>
             <Container>
+                <h1><a href="https://hoff.tech" target="_blank" rel="noopener noreferrer">Ken Hoff</a>'s GitHub Searcher</h1>
                 <Row>
-                    <Col>
+                    <Col xs="4">
                         <SearchView />
                     </Col>
                     <Col>
