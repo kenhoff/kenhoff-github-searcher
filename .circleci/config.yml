@@ -8,6 +8,7 @@ jobs:
     steps:
       - checkout
       - run: yarn install --frozen-lockfile
+      - run: yarn build index.html
 workflows:
   build:
     jobs:
