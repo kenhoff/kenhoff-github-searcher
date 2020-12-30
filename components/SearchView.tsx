@@ -1,9 +1,12 @@
 import * as React from "react";
 import {useCallback, useEffect, useState} from "react";
 import {useLocation, useHistory, Link} from "react-router-dom";
-import sampleRepos from "../test/sampleRepos.json";
 import LanguageFilterInput from "./LanguageFilterInput";
 import SortInput from "./SortInput";
+import {
+    ListGroup,
+    Form
+} from "react-bootstrap";
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -82,6 +85,9 @@ const SearchView = () => {
         makeApiRequest(query.get("search") || "", query.get("languages") ? query.get("languages").split(",") : [], query.get("sort"));
     };
 
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+    };
 
     // on load, make the API request with the query string that you have
     useEffect(() => {
@@ -92,30 +98,45 @@ const SearchView = () => {
     // want to break this? include a "?" in your repo name ;)
     return (
         <>
-            <input
-                onChange={handleSearchChange}
-                value={query.get("search") || ""}
-            />
-            <LanguageFilterInput
-                onChange={handleLanguageFilterChange}
-                value={query.get("languages") ? query.get("languages").split(",") : []}
-            />
-            <SortInput
-                onChange = {handleSortChange}
-                value={query.get("sort")}
-            />
+            <Form onSubmit={handleFormSubmit}>
+                <Form.Group>
+                    <Form.Label>Search</Form.Label>
+                    <Form.Control type="input"
+                        onChange={handleSearchChange}
+                        value={query.get("search") || ""}
+                    />
+                </Form.Group>
+                <Form.Group>
+                    <LanguageFilterInput
+                        onChange={handleLanguageFilterChange}
+                        value={query.get("languages") ? query.get("languages").split(",") : []}
+                    />
+                </Form.Group>
+                <Form.Group>
+                    <SortInput
+                        onChange = {handleSortChange}
+                        value={query.get("sort")}
+                    />
+                </Form.Group>
+            </Form>
             {loading && <div>Loading repo list...</div>}
             {!loading &&
-            <ul>
+            <ListGroup>
                 {repos.map(({id, full_name, language, stargazers_count}) => {
-                    return <li key={id}><Link to={
-                        {
-                            pathname: `/${full_name}`,
-                            search: query.toString()
-                        }
-                    }>{full_name}</Link> - {language} - {stargazers_count} stars</li>;
+                    const handleRepoClick = () => {
+                        history.push(`/${full_name}?${query.toString()}`);
+                    };
+                    return (
+                        <ListGroup.Item
+                            key={id}
+                            action
+                            active = {location.pathname.split("?")[0] === `/${full_name}` ? true : false}
+                            onClick={handleRepoClick}>
+                            {full_name} - {language} - {stargazers_count} stars
+                        </ListGroup.Item>
+                    );
                 })}
-            </ul>
+            </ListGroup>
             }
         </>
     );
