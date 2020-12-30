@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   node: circleci/node@3.0.0
+  aws-s3: circleci/aws-s3@x.y.z # use the AWS S3 orb in your config
 jobs:
   build:
     machine:
