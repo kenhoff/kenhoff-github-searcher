@@ -10,6 +10,8 @@ jobs:
       - checkout
       - run: yarn install --frozen-lockfile
       - run: yarn build index.html
+      - persist_to_workspace:
+        root: dist
   deploy:
     machine:
       image: ubuntu-2004:202010-01
@@ -21,4 +23,6 @@ workflows:
   build-deploy:
     jobs:
       - build
-      - deploy
+      - deploy:
+        requires:
+          - build
