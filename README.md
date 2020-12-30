@@ -1,8 +1,7 @@
-Deployed to: http://kenhoff-github-searcher.s3-website-us-west-2.amazonaws.com/
+# See the live version at: http://kenhoff-github-searcher.s3-website-us-west-2.amazonaws.com/
 
 todo:
 
--   nuke project brief
 -   pagination
 -   unit tests
 -   integration tests
