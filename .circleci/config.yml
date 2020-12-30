@@ -11,9 +11,9 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn build index.html
       - persist_to_workspace:
-        root: dist
-        paths:
-          - dist/*
+          root: dist
+          paths:
+            - dist/*
   deploy:
     machine:
       image: ubuntu-2004:202010-01
