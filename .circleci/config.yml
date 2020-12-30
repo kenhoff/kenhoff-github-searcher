@@ -12,6 +12,8 @@ jobs:
       - run: yarn build index.html
       - persist_to_workspace:
         root: dist
+        paths:
+          - dist/*
   deploy:
     machine:
       image: ubuntu-2004:202010-01
@@ -24,5 +26,5 @@ workflows:
     jobs:
       - build
       - deploy:
-        requires:
-          - build
+          requires:
+            - build
