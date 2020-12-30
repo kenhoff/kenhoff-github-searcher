@@ -18,9 +18,9 @@ jobs:
           from: dist
           to: 's3://kenhoff-github-searcher/'
 workflows:
-  build:
+  build-deploy:
     jobs:
-      - build:
+      - build
       - deploy:
         requires:
           - build
